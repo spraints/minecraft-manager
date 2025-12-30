@@ -62,7 +62,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_192148) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
-  add_foreign_key "configuration_active_worlds", "configurations"
-  add_foreign_key "configuration_active_worlds", "worlds"
   add_foreign_key "sessions", "users"
 end

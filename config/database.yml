@@ -11,6 +11,7 @@ default: &default
 
 prod: &prod
   adapter: postgresql
+  url: <%= ENV["DATABASE_URL"] %>
   encoding: unicode
   advisory_locks: false
   statement_limit: 10

@@ -3,6 +3,9 @@ services:
     build: .
     environment:
       RAILS_ENV: "production"
+      # SECRET_KEY_BASE can be generated like "ruby -rsecurerandom -e 'puts SecureRandom.hex(64)'
+      # or you can set RAILS_MASTER_KEY to the contents of config/credentials/production.key.
+      SECRET_KEY_BASE: 9ff768667abbf33ec9bc63783e5dc88b90199ceda00e5022bec2c7e953e3c0b0adc0c0b8a202c6a803df1510111ed61985532816afa178dfe3f1404461bdb40b
       DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_prod?schema=public"
       MC_ROUTES: "/var/run/mc-router/routes.json"
     volumes:
