@@ -2,7 +2,8 @@
 
 This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
 
-- [ ] Manage admin users.
+- [x] Manage admin users.
+    - Create in console (`u = User.new; u.email = "..."; u.password = "..."; u.password_confirmation = "..."; u.save`).
 - [ ] Manage a list of servers.
     - A server has a backend host:port and a frontend name.
     - A server can be archived, but only if it's not enabled in the current configuration.
