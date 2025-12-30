@@ -1,0 +1,2 @@
+class MinecraftWorld < ApplicationRecord
+end
