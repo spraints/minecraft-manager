@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    environment:
+      RAILS_ENV: "production"
+      DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_prod?schema=public"
+      MC_ROUTES: "/var/run/mc-router/routes.json"
+    volumes:
+      - "mcrouter:/var/run/mc-router"
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: "hihihi000"
+    volumes:
+      - "pgdata:/var/lib/postgresql"
+
+volumes:
+  pgdata:
+  mcrouter:

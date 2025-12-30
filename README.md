@@ -19,3 +19,7 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
     1. mc-router is running with [`-routes-config-watch`](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#routing-configuration) and autoreloads it.
 - [ ] Expose webhook activity.
     - [payload](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#webhook-support).
+
+## Deployment
+
+`compose.yaml` has an example deployment.
