@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_30_183336) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_30_192148) do
   create_table "configuration_active_worlds", force: :cascade do |t|
     t.integer "configuration_id", null: false
     t.datetime "created_at", null: false
@@ -21,10 +21,19 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_183336) do
     t.index ["world_id"], name: "index_configuration_active_worlds_on_world_id"
   end
 
+  create_table "configuration_activities", force: :cascade do |t|
+    t.integer "configuration_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["configuration_id"], name: "index_configuration_activities_on_configuration_id"
+    t.index ["user_id"], name: "index_configuration_activities_on_user_id"
+  end
+
   create_table "configurations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "parent_id"
-    t.string "state"
+    t.string "state", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_configurations_on_parent_id"
   end
