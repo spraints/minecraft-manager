@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_30_181912) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_30_183336) do
+  create_table "configuration_active_worlds", force: :cascade do |t|
+    t.integer "configuration_id", null: false
+    t.datetime "created_at", null: false
+    t.string "hostname", null: false
+    t.datetime "updated_at", null: false
+    t.integer "world_id", null: false
+    t.index ["configuration_id"], name: "index_configuration_active_worlds_on_configuration_id"
+    t.index ["world_id"], name: "index_configuration_active_worlds_on_world_id"
+  end
+
+  create_table "configurations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "parent_id"
+    t.string "state"
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_configurations_on_parent_id"
+  end
+
+  create_table "minecraft_worlds", force: :cascade do |t|
+    t.string "backend_addr", null: false
+    t.datetime "created_at", null: false
+    t.string "display_name", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -28,5 +53,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_181912) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "configuration_active_worlds", "configurations"
+  add_foreign_key "configuration_active_worlds", "worlds"
   add_foreign_key "sessions", "users"
 end
