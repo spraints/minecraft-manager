@@ -9,6 +9,12 @@ default: &default
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+prod: &prod
+  adapter: postgresql
+  encoding: unicode
+  advisory_locks: false
+  statement_limit: 10
+
 development:
   <<: *default
   database: storage/development.sqlite3
@@ -25,17 +31,17 @@ test:
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   primary:
-    <<: *default
-    database: storage/production.sqlite3
+    <<: *prod
+    database: minecraft_manager_prod
   cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
+    <<: *prod
+    database: minecraft_manager_cache_prod
     migrations_paths: db/cache_migrate
   queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
+    <<: *prod
+    database: minecraft_manager_queue_prod
     migrations_paths: db/queue_migrate
   cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
+    <<: *prod
+    database: minecraft_manager_cable_prod
     migrations_paths: db/cable_migrate
