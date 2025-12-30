@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_30_192148) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_30_212359) do
   create_table "configuration_active_worlds", force: :cascade do |t|
     t.integer "configuration_id", null: false
     t.datetime "created_at", null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_30_192148) do
   end
 
   create_table "configuration_activities", force: :cascade do |t|
+    t.string "action", null: false
     t.integer "configuration_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
