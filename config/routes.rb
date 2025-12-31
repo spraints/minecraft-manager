@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "minecraft_worlds#index"
   resources :minecraft_worlds, path: "worlds"
   resources :configurations
 
