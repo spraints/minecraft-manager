@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
-  root to: "minecraft_worlds#index"
+  root to: "configurations#index"
+  resources :configurations do
+    member do
+      put "queued" => "configurations#queue"
+    end
+  end
   resources :minecraft_worlds, path: "worlds" do
     member do
       put "archived" => "minecraft_worlds#archive"
     end
   end
-  resources :configurations
 
+  # Rails's authentication routes.
   resource :session
   resources :passwords, param: :token
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
