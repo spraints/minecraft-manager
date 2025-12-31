@@ -1,0 +1,15 @@
+#!/usr/bin/env bin/rails runner
+
+email = "spraints@gmail.com"
+pass = "0000"
+
+if me = User.where(email_address: email).first
+  puts "#{email}: already exists"
+  exit 0
+end
+
+User.create! \
+  email_address: email,
+  password: pass,
+  password_confirmation: pass
+puts "#{email}: created"

@@ -24,3 +24,10 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
 ## Deployment
 
 `compose.yaml` has an example deployment.
+
+## Future ideas
+
+- Manage minecraft servers too.
+    - Maybe continue using tmux-based thing we're using.
+    - Hook into mc-router's scale-to-zero feature so we can do the same.
+- Use [migration plugin](https://railsatscale.com/2025-12-08-swappable-migration-backends-in-rails/) to do skeema or similar schema diff migrations.

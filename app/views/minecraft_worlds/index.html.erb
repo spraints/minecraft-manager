@@ -1,0 +1,13 @@
+<h1>Worlds</h1>
+
+<div id="worlds">
+  <div>
+    <%= link_to "New world", action: :new %>
+  </div>
+  <% @worlds.each do |world| %>
+    <div>
+      <%= link_to world.display_name, world %>
+      (<span class="addr"><%= world.backend_addr %></span>)
+    </div>
+  <% end %>
+</div>

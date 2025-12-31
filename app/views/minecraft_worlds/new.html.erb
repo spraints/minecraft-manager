@@ -1,0 +1,23 @@
+<h1>New Minecraft World</h1>
+
+<%= form_with model: @world do |form| %>
+  <% unless form.object.errors.empty? %>
+    <p class="error"><%= form.object.errors.full_messages.first %></p>
+  <% end %>
+
+  <div>
+    <%= form.label :display_name %>
+    <%= form.text_field :display_name %>
+  </div>
+
+  <div>
+    <%= form.label :backend_addr %>
+    <%= form.text_field :backend_addr %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to "Cancel", minecraft_worlds_path %>
