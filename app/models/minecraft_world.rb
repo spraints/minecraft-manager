@@ -5,6 +5,6 @@ class MinecraftWorld < ApplicationRecord
   validate :cannot_change, except_on: :create
 
   def cannot_change
-    errors.add :display_name, 'cannot be changed after creation' if changed?
+    errors.add :display_name, "cannot be changed after creation" if changed?
   end
 end
