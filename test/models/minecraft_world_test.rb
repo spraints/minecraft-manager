@@ -30,11 +30,16 @@ class MinecraftWorldTest < ActiveSupport::TestCase
       hostname: "active-world",
       world: @active_world
 
-    c3 = Configuration.create! state: "proposed", parent: c2
+    @pending_config = Configuration.create! state: "proposed", parent: c2
     ConfigurationActiveWorld.create! \
-      configuration: c3,
+      configuration: @pending_config,
       hostname: "pending",
       world: @pending_world
+  end
+
+  test "lonely world configuration state when no configurations exist" do
+    Configuration.delete_all
+    assert_equal :absent, @lonely_world.configuration_state
   end
 
   test "lonely world configuration state" do
@@ -69,6 +74,11 @@ class MinecraftWorldTest < ActiveSupport::TestCase
   end
 
   test "pending world configuration state" do
+    assert_equal :pending, @pending_world.configuration_state
+  end
+
+  test "pending world configuration state when only pending configuration exists" do
+    Configuration.where("id <> #{@pending_config.id}").delete_all
     assert_equal :pending, @pending_world.configuration_state
   end
 

@@ -35,11 +35,11 @@ class MinecraftWorld < ApplicationRecord
   # :inactive - is in a previous configuration, but not an active or pending one.
   def configuration_state
     cc = Configuration.current
-    if cc.active_worlds.any? { |aw| aw.minecraft_world_id == id }
+    if cc && cc.active_worlds.any? { |aw| aw.minecraft_world_id == id }
       return :active
     end
     cw = configuration_worlds
-    if cw.any? { |cw| cw.configuration_id > cc.id }
+    if cw.any? { |cw| cc.nil? || cw.configuration_id > cc.id }
       return :pending
     end
     if cw.empty?

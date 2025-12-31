@@ -1,7 +1,13 @@
-<h1><%= @world.display_name %></h1>
+<h1><%= @world.display_name %><% if @world.archived_at %> (archived)<% end %></h1>
 
 <div>
   address: <span class="addr"><%= @world.backend_addr %></span>
+</div>
+
+<div>
+  <%= link_to "Edit", edit_minecraft_world_path(@world) %>
+  <%= button_to "Delete", @world, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this world?" } %>
+  <%= button_to "Archive", archived_minecraft_world_path(@world), method: :put, data: { turbo_confirm: "Are you sure you want to archive this world?" } %>
 </div>
 
 <%= link_to "<< All Worlds", minecraft_worlds_path %>

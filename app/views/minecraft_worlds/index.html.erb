@@ -2,9 +2,20 @@
 
 <div id="worlds">
   <div>
-    <%= link_to "New world", action: :new %>
+    <%= link_to "New world", new_minecraft_world_path %>
   </div>
   <% @worlds.each do |world| %>
+    <div>
+      <%= link_to world.display_name, world %>
+      (<span class="addr"><%= world.backend_addr %></span>)
+    </div>
+  <% end %>
+</div>
+
+<h2>Archived worlds</h2>
+
+<div id="archived-worlds">
+  <% @archived.each do |world| %>
     <div>
       <%= link_to world.display_name, world %>
       (<span class="addr"><%= world.backend_addr %></span>)

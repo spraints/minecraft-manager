@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: "minecraft_worlds#index"
-  resources :minecraft_worlds, path: "worlds"
+  resources :minecraft_worlds, path: "worlds" do
+    member do
+      put "archived" => "minecraft_worlds#archive"
+    end
+  end
   resources :configurations
 
   resource :session

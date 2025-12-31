@@ -1,10 +1,11 @@
 class MinecraftWorldsController < ApplicationController
   def index
     @worlds = MinecraftWorld.all
+    @archived = MinecraftWorld.archived.all
   end
 
   def show
-    @world = MinecraftWorld.find(params[:id])
+    @world = MinecraftWorld.unscoped.find(params[:id])
   end
 
   def new
@@ -20,10 +21,30 @@ class MinecraftWorldsController < ApplicationController
     end
   end
 
-  # todo - allow edit when the backend hasn't been in any configurations.
-  # todo - allow destroy when the backend hasn't been in any configurations.
-  # todo - allow archive when the backend isn't in the current configuration.
-  #   <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+  def edit
+    @world = MinecraftWorld.find(params[:id])
+  end
+
+  def update
+    @world = MinecraftWorld.find(params[:id])
+    if @world.update(world_params)
+      redirect_to @world
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @world = MinecraftWorld.find(params[:id])
+    @world.destroy!
+    redirect_to action: :index
+  end
+
+  def archive
+    @world = MinecraftWorld.find(params[:id])
+    @world.archive!
+    redirect_to action: :index
+  end
 
   private
 
