@@ -1,0 +1,29 @@
+<h1>Minecraft Router Manager</h1>
+
+This page lets you control our <a href="https://github.com/itzg/mc-router">mc-router</a> installation.
+
+<h2>Current Configuration</h2>
+
+<% if @current.nil? %>
+  No configuration has been applied yet. Create one below to get started!
+<% else %>
+  <%= render "show", configuration: @current %>
+<% end %>
+
+<h2>Pending Configurations</h2>
+
+<ul>
+  <% @proposed.each do |config| %>
+    <% if @current.nil? || config.parent_id == @current.id %>
+      <li>
+        <%= link_to config %>
+        <%= button_to "Apply", queued_configuration_path(config), method: :put %>
+      </li>
+    <% end %>
+  <% end %>
+  <li><%= link_to "New configuration", new_configuration_path %></li>
+</ul>
+
+<hr>
+
+<%= link_to "Available worlds", minecraft_worlds_path %>
