@@ -9,11 +9,11 @@ class ConfigurationsController < ApplicationController
   end
 
   def new
-    @configuration = Configuration.new
+    @configuration, @config_worlds = ConfigurationBuilder.prepare(Configuration.current)
   end
 
   def create
-    @configuration, ok = ConfigurationBuilder.create_from_params(params)
+    @configuration, @config_worlds, ok = ConfigurationBuilder.create_from_params(params)
     if ok
       redirect_to action: :index
     else
@@ -22,11 +22,11 @@ class ConfigurationsController < ApplicationController
   end
 
   def edit
-    @configuration = Configuration.find(params[:id])
+    @configuration, @config_worlds = Configuration.find(params[:id])
   end
 
   def update
-    @configuration, ok = ConfigurationBuilder.update_from_params(params)
+    @configuration, @config_worlds, ok = ConfigurationBuilder.update_from_params(params)
     if ok
       redirect_to action: :update
     else

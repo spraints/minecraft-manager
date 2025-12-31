@@ -1,0 +1,6 @@
+<% worlds.each do |world| %>
+  <div>
+    <%= link_to world.display_name, world %>
+    (<span class="addr"><%= world.backend_addr %></span>)
+  </div>
+<% end %>
