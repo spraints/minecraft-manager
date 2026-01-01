@@ -10,6 +10,10 @@ class CreateMcRouterEvents < ActiveRecord::Migration[8.1]
       t.string :player_name
       t.string :player_uuid
       t.string :backend_addr
+
+      t.references :minecraft_world
+      t.references :configuration_active_world
+
       t.string :sender_addr
       t.string :raw_payload
 
