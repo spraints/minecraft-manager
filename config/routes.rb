@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post "hook/mcrouter", to: "hooks#create"
+
   # Rails's authentication routes.
   resource :session
   resources :passwords, param: :token

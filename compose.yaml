@@ -42,6 +42,7 @@ services:
     environment:
       ROUTES_CONFIG: "/var/run/mc-router/config/routes.json"
       ROUTES_CONFIG_WATCH: "true"
+      WEBHOOK_URL: "http://app:3000/hook/mcrouter"
     ports:
       - "127.0.0.1:25565:25565"
     volumes:
