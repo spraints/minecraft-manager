@@ -3,4 +3,5 @@
 set -ex
 
 docker compose up -d postgres
-docker compose run --rm -it app bin/rails db:migrate db:version
+docker compose build app
+docker compose run --rm -it app bin/rails db:prepare db:version
