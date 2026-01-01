@@ -40,13 +40,13 @@ production:
     url: <%= ENV["DATABASE_URL"] %>
   cache:
     <<: *prod
-    database: minecraft_manager_cache_prod
+    url: <%= ENV["CACHE_DATABASE_URL"] %>
     migrations_paths: db/cache_migrate
   queue:
     <<: *prod
-    url: <%= ENV["JOBS_DATABASE_URL"] %>
+    url: <%= ENV["QUEUE_DATABASE_URL"] %>
     migrations_paths: db/queue_migrate
   cable:
     <<: *prod
-    database: minecraft_manager_cable_prod
+    url: <%= ENV["CABLE_DATABASE_URL"] %>
     migrations_paths: db/cable_migrate

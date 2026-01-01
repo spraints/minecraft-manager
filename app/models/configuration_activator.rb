@@ -12,6 +12,7 @@ class ConfigurationActivator
       mappings[aw.hostname] = aw.world.backend_addr
     end
     dest_path = Rails.application.config.mc_router_config_path
+    raise "Missing MC_ROUTES environment variable" if dest_path.blank?
     mcrouter_config = JSON.dump({mappings: mappings})
     if ok_to_apply?(configuration)
       File.write dest_path, mcrouter_config

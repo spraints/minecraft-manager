@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.mc_router_config_path = ENV.fetch("MC_ROUTES")
+  config.mc_router_config_path = ENV["MC_ROUTES"]
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
