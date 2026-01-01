@@ -1,0 +1,2 @@
+class McRouterEvent < ApplicationRecord
+end
