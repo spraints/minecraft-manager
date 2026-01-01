@@ -8,6 +8,9 @@
 #   Add my user:
 #   $ docker compose run --rm app -- bin/rails runner script/seed-spraints
 #
+#   Prep output:
+#   $ docker compose run --rm -u 0 app -- script/setup-mcrouter-path
+#
 #   Run this to bring the thing up:
 #   $ docker compose up
 #
@@ -24,7 +27,8 @@ services:
       QUEUE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_queue_prod?schema=public"
       CACHE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_cache_prod?schema=public"
       CABLE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_cable_prod?schema=public"
-      MC_ROUTES: "/var/run/mc-router/routes.json"
+      MC_ROUTES: "/var/run/mc-router/config/routes.json"
+      SOLID_QUEUE_IN_PUMA: "true"
     volumes:
       - "mcrouter:/var/run/mc-router"
     ports:
@@ -33,7 +37,7 @@ services:
   mcrouter:
     image: "itzg/mc-router:latest@sha256:4b8fb4a0a035c7a1fa1098a0a1c59554bbbfa5b7558f3901ca21b942744c47f3"
     environment:
-      ROUTES_CONFIG: "/var/run/mc-router/routes.json"
+      ROUTES_CONFIG: "/var/run/mc-router/config/routes.json"
       ROUTES_CONFIG_WATCH: "true"
     volumes:
       - "mcrouter:/var/run/mc-router"

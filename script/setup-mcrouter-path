@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -ex
+
+DIR="$(dirname "$MC_ROUTES")"
+mkdir -p "$DIR"
+touch "$MC_ROUTES"
+chown -R 1000:1000 "$DIR" "$MC_ROUTES"
