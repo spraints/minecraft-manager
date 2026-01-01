@@ -35,6 +35,29 @@ class ConfigurationBuilder
     c
   end
 
+  def self.update_from_params(config, params)
+    Configuration.transaction do
+      by_world_id = config.active_worlds.index_by { |aw| aw.minecraft_world_id }
+      params[:configuration][:configuration_builder_world].each do |key, wparams|
+        enabled = wparams[:enabled] == "1"
+        if aw = by_world_id.delete(key.to_i)
+          if enabled
+            aw.update!(hostname: wparams[:hostname])
+          else
+            aw.destroy!
+          end
+        elsif enabled
+          config.active_worlds.create! minecraft_world_id: key, hostname: wparams[:hostname]
+        end
+      end
+      by_world_id.values.each(&:destroy!)
+    end
+    true
+  rescue ActiveRecord::RecordInvalid => e
+    config.reload
+    false
+  end
+
   # World is a model that represents a MinecraftWorld that may or may not be
   # included as a ConfigurationActiveWorld.
   class World

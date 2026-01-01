@@ -36,7 +36,7 @@ class ConfigurationsController < ApplicationController
       raise "illegal edit"
     end
     if ConfigurationBuilder.update_from_params(@configuration, params)
-      redirect_to action: :update
+      redirect_to action: :show
     else
       @config_worlds = ConfigurationBuilder.prepare_worlds(@configuration)
       render :edit, status: :unprocessable_entity
