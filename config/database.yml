@@ -18,6 +18,7 @@ prod: &prod
   username: <%= ENV["MINECRAFT_MANAGER_DB_USERNAME"] %>
   password: <%= ENV["MINECRAFT_MANAGER_DB_PASSWORD"] %>
   sslmode: <%= ENV.fetch("MINECRAFT_MANAGER_DB_SSLMODE", "verify-full") %>
+  sslrootcert: /etc/ssl/certs/ca-certificates.crt
 
 development:
   primary:
