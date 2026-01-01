@@ -23,10 +23,10 @@ services:
       # SECRET_KEY_BASE can be generated like "ruby -rsecurerandom -e 'puts SecureRandom.hex(64)'
       # or you can set RAILS_MASTER_KEY to the contents of config/credentials/production.key.
       SECRET_KEY_BASE: 9ff768667abbf33ec9bc63783e5dc88b90199ceda00e5022bec2c7e953e3c0b0adc0c0b8a202c6a803df1510111ed61985532816afa178dfe3f1404461bdb40b
-      DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_prod?schema=public"
-      QUEUE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_queue_prod?schema=public"
-      CACHE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_cache_prod?schema=public"
-      CABLE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_cable_prod?schema=public"
+      MINECRAFT_MANAGER_DB_HOST: postgres
+      MINECRAFT_MANAGER_DB_USERNAME: postgres
+      MINECRAFT_MANAGER_DB_PASSWORD: hihihi000
+      MINECRAFT_MANAGER_DB_SSLMODE: disable
       MC_ROUTES: "/var/run/mc-router/config/routes.json"
       SOLID_QUEUE_IN_PUMA: "true"
     volumes:
