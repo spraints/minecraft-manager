@@ -1,8 +1,13 @@
 <h1>New Configuration</h1>
 
 <%= form_with model: @configuration do |form| %>
-  <% unless form.object.errors.empty? %>
-    <p class="error"><%= form.object.errors.full_messages.first %></p>
+  <% form.object.errors.each do |err| %>
+    <p class="error"><%= err.full_message %></p>
+  <% end %>
+  <% form.object.active_worlds.each do |aw| %>
+    <% aw.errors.each do |err| %>
+      <p class="error"><%= err.full_message %></p>
+    <% end %>
   <% end %>
 
   <% if form.object.new_record? %>

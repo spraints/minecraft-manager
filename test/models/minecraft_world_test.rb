@@ -18,23 +18,19 @@ class MinecraftWorldTest < ActiveSupport::TestCase
       display_name: "currently in a config",
       backend_addr: "127.0.0.1:8888"
 
-    c1 = Configuration.create! state: "applied"
-    ConfigurationActiveWorld.create! \
-      configuration: c1,
-      hostname: "old-world",
-      world: @old_world
+    c1 = Configuration.new(state: "proposed")
+    c1.active_worlds.build(world: @old_world, hostname: "old-world")
+    c1.save!
+    c1.update!(state: "applied")
 
-    c2 = Configuration.create! state: "applied", parent: c1
-    ConfigurationActiveWorld.create! \
-      configuration: c2,
-      hostname: "active-world",
-      world: @active_world
+    c2 = Configuration.new(state: "proposed", parent: c1)
+    c2.active_worlds.build(world: @active_world, hostname: "active-world")
+    c2.save!
+    c2.update!(state: "applied")
 
-    @pending_config = Configuration.create! state: "proposed", parent: c2
-    ConfigurationActiveWorld.create! \
-      configuration: @pending_config,
-      hostname: "pending",
-      world: @pending_world
+    @pending_config = Configuration.new(state: "proposed", parent: c2)
+    @pending_config.active_worlds.build(world: @pending_world, hostname: "pending")
+    @pending_config.save!
   end
 
   test "lonely world configuration state when no configurations exist" do

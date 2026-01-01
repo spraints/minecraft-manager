@@ -13,10 +13,11 @@ class ConfigurationsController < ApplicationController
   end
 
   def create
-    @configuration, @config_worlds, ok = ConfigurationBuilder.create_from_params(params)
-    if ok
+    @configuration = ConfigurationBuilder.build_from_params(params)
+    if @configuration.save
       redirect_to action: :index
     else
+      @config_worlds = ConfigurationBuilder.prepare_worlds(@configuration)
       render :new, status: :unprocessable_entity
     end
   end
