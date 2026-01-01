@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_31_185054) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_01_193552) do
   create_table "configuration_active_worlds", force: :cascade do |t|
     t.integer "configuration_id", null: false
     t.datetime "created_at", null: false
@@ -37,6 +37,24 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_31_185054) do
     t.string "state", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_configurations_on_parent_id"
+  end
+
+  create_table "mc_router_events", force: :cascade do |t|
+    t.string "backend_addr"
+    t.string "client_host"
+    t.integer "client_port"
+    t.integer "configuration_active_world_id"
+    t.datetime "created_at", null: false
+    t.string "event"
+    t.string "hostname"
+    t.datetime "occurred_at"
+    t.string "player_name"
+    t.string "player_uuid"
+    t.string "raw_payload"
+    t.string "sender_addr"
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.index ["configuration_active_world_id"], name: "index_mc_router_events_on_configuration_active_world_id"
   end
 
   create_table "minecraft_worlds", force: :cascade do |t|
