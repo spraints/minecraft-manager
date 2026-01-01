@@ -14,6 +14,14 @@ This page lets you control our <a href="https://github.com/itzg/mc-router">mc-ro
   <div>dev only: <a href="/mcrouter.json">View rendered config</a></div>
 <% end %>
 
+<% unless @queued.empty? %>
+  <h2>Applying Configurations</h2>
+
+  <% @queued.each do |cfg| %>
+    <%= render "show", configuration: @current, heading: "h3" %>
+  <% end %>
+<% end %>
+
 <h2>Pending Configurations</h2>
 
 <ul>
