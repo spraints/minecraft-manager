@@ -10,6 +10,8 @@ This page lets you control our <a href="https://github.com/itzg/mc-router">mc-ro
   <%= render "show", configuration: @current, heading: "h3" %>
 <% end %>
 
+<div><%= link_to "See who's using it", mc_router_events_path %></div>
+
 <% if Rails.env.development? %>
   <div>dev only: <a href="/mcrouter.json">View rendered config</a></div>
 <% end %>

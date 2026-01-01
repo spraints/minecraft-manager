@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get "events", to: "mc_router_events#index", as: :mc_router_events
+  post "hook/mcrouter", to: "hooks#create"
+
   # Rails's authentication routes.
   resource :session
   resources :passwords, param: :token

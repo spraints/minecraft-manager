@@ -13,7 +13,7 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
     - Active configuration is the "applied" version with the highest number.
     - From the current configuration, activating / deactivating generates a new proposed config.
     - Configuration versions are shown like an audit log.
-- [ ] Apply new configuration.
+- [x] Apply new configuration.
     1. Only one at a time.
     1. Check that it's not superceded.
     1. Generate a file on disk. File location is configured in docker-compose env.
@@ -22,6 +22,7 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
     - [payload](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#webhook-support).
     - Add backend-specific events to `minecraft_worlds#show`.
     - Add global events to `configurations#index`.
+- [ ] Some other [queue backend](https://api.rubyonrails.org/v8.1.1/classes/ActiveJob/QueueAdapters.html).
 - [ ] Audit log
     - Fill in table `ConfigurationActivity`.
 - [ ] Live reload of homepage (`configurations#index`) and activity.

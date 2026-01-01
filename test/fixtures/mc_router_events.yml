@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: MyString
+  occurred_at: 2026-01-01 14:35:52
+  status: MyString
+  client_host: MyString
+  client_port: 1
+  hostname: MyString
+  player_name: MyString
+  player_uuid: MyString
+  backend_addr: MyString
+  sender_addr: MyString
+  raw_payload: MyString
+
+two:
+  event: MyString
+  occurred_at: 2026-01-01 14:35:52
+  status: MyString
+  client_host: MyString
+  client_port: 1
+  hostname: MyString
+  player_name: MyString
+  player_uuid: MyString
+  backend_addr: MyString
+  sender_addr: MyString
+  raw_payload: MyString
