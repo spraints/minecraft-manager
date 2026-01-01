@@ -6,6 +6,7 @@
       <th>Time</th>
       <th>Event</th>
       <th>Status</th>
+      <th>Client</th>
       <th>Server</th>
       <th>Player</th>
     </tr>
@@ -16,6 +17,7 @@
         <td><%=time_tag ev.occurred_at %></td>
         <td><%= ev.event %></td>
         <td><%= ev.status %></td>
+        <td><%=client_for_event ev %></td>
         <td><%=server_for_event ev %></td>
         <td><%=player_for_event ev %></td>
       </tr>

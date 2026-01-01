@@ -1,4 +1,8 @@
 module McRouterEventsHelper
+  def client_for_event(ev)
+    Zlib.crc32("#{Rails.application.secret_key_base}//#{ev.client_host}//#{ev.client_port}").to_s(16)
+  end
+
   def server_for_event(ev)
     aw = ev.configuration_active_world
     cfg = aw&.configuration
