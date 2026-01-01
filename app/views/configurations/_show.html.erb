@@ -1,0 +1,15 @@
+<<%=heading%>>Configuration #<%= configuration.id %></<%=heading%>>
+
+<div>State: <%= configuration.state %></div>
+
+<div>
+  <ul>
+    <% configuration.active_worlds.each do |aw| %>
+      <li>
+        <span class="hostname"><%= aw.hostname %></span>
+        &rarr;
+        <span class="addr"><%= aw.world.backend_addr %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>
