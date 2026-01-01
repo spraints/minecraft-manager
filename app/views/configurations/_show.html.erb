@@ -1,5 +1,8 @@
 <<%=heading%>>Configuration #<%= configuration.id %></<%=heading%>>
 
+<% if configuration.parent_id %>
+  <div>Preceeded by: <%= link_to "##{configuration.parent_id}", id: configuration.parent_id %></div>
+<% end %>
 <div>State: <%= configuration.state %></div>
 
 <div>

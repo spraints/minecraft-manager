@@ -1,1 +1,8 @@
 <%= render "show", configuration: @configuration, heading: "h1" %>
+
+<% if @configuration.edit_ok? %>
+  <%= link_to "Edit", action: :edit %>
+<% end %>
+<% if @configuration.apply_ok? %>
+  <%= button_to "Apply", queued_configuration_path(config), method: :put %>
+<% end %>

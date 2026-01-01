@@ -1,0 +1,33 @@
+<%= form_with model: configuration do |form| %>
+  <% form.object.errors.each do |err| %>
+    <p class="error"><%= err.full_message %></p>
+  <% end %>
+  <% form.object.active_worlds.each do |aw| %>
+    <% aw.errors.each do |err| %>
+      <p class="error"><%= err.full_message %></p>
+    <% end %>
+  <% end %>
+
+  <% if form.object.new_record? %>
+    <%= form.hidden_field :parent_id %>
+    <%= form.hidden_field :state %>
+  <% end %>
+
+  <div>
+    <% config_worlds.each do |config_world| %>
+      <%= form.fields_for(config_world, index: config_world.id) do |fields| %>
+        <div>
+          <%= fields.checkbox :enabled %>
+          <%= fields.text_field :hostname, placeholder: "hostname" %>
+          &rarr; <%= render config_world.world %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to "Cancel", :back %>

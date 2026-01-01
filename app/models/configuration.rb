@@ -2,12 +2,22 @@ class Configuration < ApplicationRecord
   belongs_to :parent, class_name: "Configuration", optional: true
   has_many :active_worlds, class_name: "ConfigurationActiveWorld"
 
-  validates :state, inclusion: %w[proposed queued applied]
-  validate :validate_initial_state, on: :create
+  validates :state, inclusion: { in: :valid_next_states }
   validate :validate_parentage_is_linear
 
-  def validate_initial_state
-    errors.add :state, "must be proposed on new records" unless state == "proposed"
+  def valid_next_states
+    case
+    when new_record?
+      %w[ proposed ]
+    when state_was == "proposed"
+      %w[ proposed queued ]
+    when state_was == "queued"
+      %w[ proposed queued applied ]
+    when state_was == "applied"
+      %w[ applied ]
+    else
+      raise "illegal initial state #{state_was}"
+    end
   end
 
   def validate_parentage_is_linear
@@ -21,4 +31,12 @@ class Configuration < ApplicationRecord
   scope :proposed, -> { where(state: "proposed").order("id ASC") }
   scope :queued, -> { where(state: "queued") }
   scope :applied, -> { where(state: "applied").order("id DESC") }
+
+  def edit_ok?
+    state == "proposed"
+  end
+
+  def apply_ok?
+    state == "proposed"
+  end
 end

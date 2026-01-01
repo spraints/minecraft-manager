@@ -21,11 +21,13 @@ class MinecraftWorldTest < ActiveSupport::TestCase
     c1 = Configuration.new(state: "proposed")
     c1.active_worlds.build(world: @old_world, hostname: "old-world")
     c1.save!
+    c1.update!(state: "queued")
     c1.update!(state: "applied")
 
     c2 = Configuration.new(state: "proposed", parent: c1)
     c2.active_worlds.build(world: @active_world, hostname: "active-world")
     c2.save!
+    c2.update!(state: "queued")
     c2.update!(state: "applied")
 
     @pending_config = Configuration.new(state: "proposed", parent: c2)

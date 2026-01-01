@@ -23,14 +23,22 @@ class ConfigurationsController < ApplicationController
   end
 
   def edit
-    @configuration, @config_worlds = Configuration.find(params[:id])
+    @configuration = Configuration.find(params[:id])
+    if !@configuration.edit_ok?
+      raise "illegal edit"
+    end
+    @config_worlds = ConfigurationBuilder.prepare_worlds(@configuration)
   end
 
   def update
-    @configuration, @config_worlds, ok = ConfigurationBuilder.update_from_params(params)
-    if ok
+    @configuration = Configuration.find(params[:id])
+    if !@configuration.edit_ok?
+      raise "illegal edit"
+    end
+    if ConfigurationBuilder.update_from_params(@configuration, params)
       redirect_to action: :update
     else
+      @config_worlds = ConfigurationBuilder.prepare_worlds(@configuration)
       render :edit, status: :unprocessable_entity
     end
   end
