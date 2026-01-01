@@ -4,10 +4,10 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
 
 - [x] Manage admin users.
     - Create in console (`u = User.new; u.email = "..."; u.password = "..."; u.password_confirmation = "..."; u.save`).
-- [ ] Manage a list of servers.
+- [x] Manage a list of servers.
     - A server has a backend host:port and a frontend name.
     - A server can be archived, but only if it's not enabled in the current configuration.
-- [ ] Manage current configuration.
+- [x] Manage current configuration.
     - Configuration is a list of active servers.
     - Configuration can be in one of several states: proposed, queued, applied.
     - Active configuration is the "applied" version with the highest number.
@@ -20,6 +20,11 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
     1. mc-router is running with [`-routes-config-watch`](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#routing-configuration) and autoreloads it.
 - [ ] Expose webhook activity.
     - [payload](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#webhook-support).
+    - Add backend-specific events to `minecraft_worlds#show`.
+    - Add global events to `configurations#index`.
+- [ ] Audit log
+    - Fill in table `ConfigurationActivity`.
+- [ ] Live reload of homepage (`configurations#index`) and activity.
 
 ## Deployment
 

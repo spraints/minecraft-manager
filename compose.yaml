@@ -1,3 +1,14 @@
+# Usage:
+#   Run this until it succeeds:
+#   $ script/compose-migrate
+#
+#   Add my user:
+#   $ docker compose run --rm app -- bin/rails runner script/seed-spraints
+#
+#   Run this to bring the thing up:
+#   $ docker compose up
+#
+#   Open http://127.0.0.1:3080/
 services:
   app:
     build: .
@@ -9,6 +20,16 @@ services:
       DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_prod?schema=public"
       QUEUE_DATABASE_URL: "postgresql://postgres:hihihi000@postgres:5432/minecraft_manager_queue_prod?schema=public"
       MC_ROUTES: "/var/run/mc-router/routes.json"
+    volumes:
+      - "mcrouter:/var/run/mc-router"
+    ports:
+      - "127.0.0.1:3080:3000"
+
+  mcrouter:
+    image: "itzg/mc-router:latest@sha256:4b8fb4a0a035c7a1fa1098a0a1c59554bbbfa5b7558f3901ca21b942744c47f3"
+    environment:
+      ROUTES_CONFIG: "/var/run/mc-router/routes.json"
+      ROUTES_CONFIG_WATCH: "true"
     volumes:
       - "mcrouter:/var/run/mc-router"
 
