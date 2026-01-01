@@ -12,8 +12,8 @@ class ConfigurationBuilderTest < ActiveSupport::TestCase
 
   test "first configuration" do
     world_params = {
-      @world1.id => {enabled: true, hostname: "host1"},
-      @world2.id => {enabled: false, hostname: "host2"},
+      @world1.id => { enabled: true, hostname: "host1" },
+      @world2.id => { enabled: false, hostname: "host2" }
     }
     c = ConfigurationBuilder.build_from_params(params(worlds: world_params))
     assert_nil c.parent_id
@@ -33,10 +33,10 @@ class ConfigurationBuilderTest < ActiveSupport::TestCase
           [ id.to_s,
             {
               "enabled" => wp.fetch(:enabled, false) ? "1" : "0",
-              "hostname" => wp.fetch(:hostname, ""),
+              "hostname" => wp.fetch(:hostname, "")
             } ]
-        }.to_h,
-      },
+        }.to_h
+      }
     })
   end
 end

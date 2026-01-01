@@ -13,7 +13,7 @@ class ConfigurationActivator
     end
     dest_path = Rails.application.config.mc_router_config_path
     raise "Missing MC_ROUTES environment variable" if dest_path.blank?
-    mcrouter_config = JSON.dump({mappings: mappings})
+    mcrouter_config = JSON.dump({ mappings: mappings })
     raise "illegal application" unless ok_to_apply?(configuration)
     File.write dest_path, mcrouter_config
     configuration.update!(state: "applied")

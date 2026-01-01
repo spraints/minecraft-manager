@@ -3,7 +3,7 @@ class MinecraftWorld < ApplicationRecord
   has_many :configurations, through: :configuration_worlds
 
   scope :archived, -> { unscoped.where("archived_at IS NOT NULL") }
-  default_scope { where("archived_at IS NULL" ) }
+  default_scope { where("archived_at IS NULL") }
 
   validates :display_name, presence: true
   validates :backend_addr, presence: true, format: { with: /\A([^:]+):(\d+)\z/ }

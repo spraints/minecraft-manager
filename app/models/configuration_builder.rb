@@ -2,7 +2,7 @@ class ConfigurationBuilder
   def self.prepare(current)
     config = Configuration.new(parent: current, state: "proposed")
     config_worlds = prepare_worlds(current)
-    [config, config_worlds]
+    [ config, config_worlds ]
   end
 
   def self.prepare_worlds(config)
