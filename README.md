@@ -18,7 +18,7 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
     1. Check that it's not superceded.
     1. Generate a file on disk. File location is configured in docker-compose env.
     1. mc-router is running with [`-routes-config-watch`](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#routing-configuration) and autoreloads it.
-- [ ] Expose webhook activity.
+- [x] Expose webhook activity.
     - [payload](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#webhook-support).
     - Add backend-specific events to `minecraft_worlds#show`.
     - Add global events to `configurations#index`.
