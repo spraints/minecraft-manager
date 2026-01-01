@@ -14,6 +14,11 @@ prod: &prod
   encoding: unicode
   advisory_locks: false
   statement_limit: 10
+  host: <%= ENV["MINECRAFT_MANAGER_DB_HOST"] %>
+  username: <%= ENV["MINECRAFT_MANAGER_DB_USERNAME"] %>
+  password: <%= ENV["MINECRAFT_MANAGER_DB_PASSWORD"] %>
+  sslmode: <%= ENV.fetch("MINECRAFT_MANAGER_DB_SSLMODE", "verify-full") %>
+  sslrootcert: /etc/ssl/certs/ca-certificates.crt
 
 development:
   primary:
@@ -37,16 +42,16 @@ test:
 production:
   primary:
     <<: *prod
-    url: <%= ENV["DATABASE_URL"] %>
+    database: minecraft_manager_prod
   cache:
     <<: *prod
-    url: <%= ENV["CACHE_DATABASE_URL"] %>
+    database: minecraft_manager_cache_prod
     migrations_paths: db/cache_migrate
   queue:
     <<: *prod
-    url: <%= ENV["QUEUE_DATABASE_URL"] %>
+    database: minecraft_manager_queue_prod
     migrations_paths: db/queue_migrate
   cable:
     <<: *prod
-    url: <%= ENV["CABLE_DATABASE_URL"] %>
+    database: minecraft_manager_cable_prod
     migrations_paths: db/cable_migrate
