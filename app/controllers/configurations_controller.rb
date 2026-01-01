@@ -44,7 +44,8 @@ class ConfigurationsController < ApplicationController
   end
 
   def queue
-    ConfigurationActivator.queue!(params[:id])
+    @configuration = Configuration.find(params[:id])
+    ConfigurationActivator.queue!(@configuration)
     redirect_to action: :index
   end
 end
