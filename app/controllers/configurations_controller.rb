@@ -1,6 +1,7 @@
 class ConfigurationsController < ApplicationController
   def index
     @current = Configuration.current
+    @queued = Configuration.queued.all
     @proposed = Configuration.proposed.all
   end
 
