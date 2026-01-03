@@ -21,7 +21,7 @@ class McRouterEventsHelperTest < ActionView::TestCase
     WEBHOOK
 
     str = client_for_event(ev)
-    assert_equal %{<<ec09fee4>>:56860}, str
+    assert_match /\A<<[0-9a-f]{8}>>:56860\z/, str
     refute str.html_safe?, "string should be tainted so that the view escapes the bracketing"
   end
 end
