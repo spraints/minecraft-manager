@@ -22,26 +22,7 @@ class HooksController < ApplicationController
   def create
     raw = request.raw_post
     Rails.logger.info "WEBHOOK RECEIVED from #{request.remote_ip}: #{raw}"
-    data = JSON.parse(raw)
-
-    ev = McRouterEvent.new
-    ev.event = data.fetch("event")
-    ev.occurred_at = DateTime.parse(data.fetch("timestamp"))
-    ev.status = data.fetch("status")
-    ev.client_host = data.fetch("client").fetch("host")
-    ev.client_port = data.fetch("client").fetch("port")
-    ev.hostname = data.fetch("server")
-    ev.player_name = data.dig("player", "name")
-    ev.player_uuid = data.dig("player", "uuid")
-    ev.backend_addr = data.fetch("backend")
-
-    ev.sender_addr = request.remote_ip
-    ev.raw_payload = raw
-
-    ev.configuration_active_world =
-      Configuration.current.active_worlds.where(hostname: ev.hostname).first
-
-    ev.save!
+    McRouterEvent.create_from_json!(raw, request.remote_ip)
 
     head :accepted
   rescue Date::Error, KeyError => e
