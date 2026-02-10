@@ -48,6 +48,11 @@ services:
     volumes:
       - "mcrouter:/var/run/mc-router"
 
+  beanstalk:
+    image: clover/beanstalk
+    volumes:
+      - bs:/var/lib/beanstalkd
+
   postgres:
     image: postgres:18
     environment:
@@ -65,6 +70,7 @@ services:
       - "mcdata:/data"
 
 volumes:
-  pgdata:
-  mcrouter:
+  bs:
   mcdata:
+  mcrouter:
+  pgdata:
