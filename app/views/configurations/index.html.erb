@@ -20,7 +20,12 @@ This page lets you control our <a href="https://github.com/itzg/mc-router">mc-ro
   <h2>Applying Configurations</h2>
 
   <% @queued.each do |cfg| %>
-    <%= render "show", configuration: @current, heading: "h3" %>
+    <%= render "show", configuration: cfg, heading: "h3" %>
+    <% if cfg.updated_at < 1.minute.ago %>
+      <div>
+        <%= button_to "re-queue", queued_configuration_path(cfg), method: :put %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 
