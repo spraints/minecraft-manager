@@ -24,10 +24,6 @@ development:
   primary:
     <<: *default
     database: storage/development.sqlite3
-  queue:
-    <<: *default
-    database: storage/development_queue.sqlite3
-    migrations_paths: db/queue_migrate
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -47,10 +43,6 @@ production:
     <<: *prod
     database: minecraft_manager_cache_prod
     migrations_paths: db/cache_migrate
-  queue:
-    <<: *prod
-    database: minecraft_manager_queue_prod
-    migrations_paths: db/queue_migrate
   cable:
     <<: *prod
     database: minecraft_manager_cable_prod

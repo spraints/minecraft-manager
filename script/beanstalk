@@ -1,0 +1,18 @@
+#!/bin/bash
+#/ Usage: script/beanstalk [BEANSTALKD ARGS]
+
+set -eu
+
+# This assumes we're on macos with it installed via homebrew.
+#   brew install beanstalk
+BIN=/opt/homebrew/opt/beanstalkd/bin/beanstalkd
+
+ROOT="$(cd "$(dirname "$0")/.."; pwd -P)"
+WAL="${ROOT}/tmp/beanstalk"
+
+set -x
+mkdir -p "$WAL"
+exec "$BIN" \
+  -l 127.0.0.1 \
+  -b "$WAL" \
+  "$@"
