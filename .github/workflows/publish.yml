@@ -6,6 +6,7 @@
 name: Publish Docker image
 
 on:
+  # gh workflow run publish.yml --ref BRANCH
   workflow_dispatch:
   push:
     branches: ['main']
