@@ -6,6 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+$: << File.expand_path("../otherlib", File.dirname(__FILE__))
+
 module MinecraftManager
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

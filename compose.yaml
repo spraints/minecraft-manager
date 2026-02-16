@@ -31,6 +31,7 @@ services:
       MINECRAFT_MANAGER_DB_PASSWORD: hihihi000
       MINECRAFT_MANAGER_DB_SSLMODE: disable
       MC_ROUTES: "/var/run/mc-router/config/routes.json"
+      BACKBURNER_IN_PUMA: "true"
     volumes:
       - "mcrouter:/var/run/mc-router"
     ports:
