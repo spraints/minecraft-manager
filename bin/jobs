@@ -1,6 +1,30 @@
 #!/usr/bin/env ruby
+#/ Usage: bin/jobs [--worker simple|forking|threading|threads-on-fork] [QUEUE...]
 
 require_relative "../config/environment"
-require "solid_queue/cli"
 
-SolidQueue::Cli.start(ARGV)
+queues = ["default"] # if you change this, you should probably change otherlib/puma/plugin/backburner, too.
+opts = {}
+while arg = ARGV.shift
+  case arg
+  when "--worker"
+    case worker_kind = ARGV.shift
+    when "simple"
+      opts[:worker] = Backburner::Workers::Simple
+    when "forking"
+      opts[:worker] = Backburner::Workers::Forking
+    when "threading"
+      opts[:worker] = Backburner::Workers::Threading
+    when "threads-on-fork"
+      opts[:worker] = Backburner::Workers::ThreadsOnFork
+    else
+      puts File.readlines(__FILE__).grep(/^#\//).map { |s| s[4..] }
+      exit 1
+    end
+  else
+    puts File.readlines(__FILE__).grep(/^#\//).map { |s| s[4..] }
+    exit 1
+  end
+end
+
+Backburner.work(*queues, **opts)

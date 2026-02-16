@@ -22,10 +22,18 @@ This app manages my [mc-router](https://github.com/itzg/mc-router) instance.
     - [payload](https://github.com/itzg/mc-router/tree/main?tab=readme-ov-file#webhook-support).
     - Add backend-specific events to `minecraft_worlds#show`.
     - Add global events to `configurations#index`.
-- [ ] Some other [queue backend](https://api.rubyonrails.org/v8.1.1/classes/ActiveJob/QueueAdapters.html).
+- [x] Some other [queue backend](https://api.rubyonrails.org/v8.1.1/classes/ActiveJob/QueueAdapters.html).
 - [ ] Audit log
     - Fill in table `ConfigurationActivity`.
 - [ ] Live reload of homepage (`configurations#index`) and activity.
+
+## Development
+
+1. Set up the database: `bin/rails db:prepare`.
+1. Add my user: `script/seed-spraints`.
+1. Run beanstalk: `script/beanstalk -V`.
+1. Run the background jobs worker: `bin/jobs &`.
+1. Run frontend: `bin/rails s`.
 
 ## Deployment
 

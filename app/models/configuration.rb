@@ -14,7 +14,9 @@ class Configuration < ApplicationRecord
     when state_was == "queued"
       %w[ proposed queued applied ]
     when state_was == "applied"
-      %w[ applied ]
+      %w[ applied retired ]
+    when state_was == "retired"
+      %w[ retired ]
     else
       raise "illegal initial state #{state_was}"
     end
