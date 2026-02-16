@@ -24,7 +24,7 @@ Puma::Plugin.create do
         @backburner_pid = fork do
           $0 = "backburner worker"
           Thread.new { monitor_puma }
-          Backburner.work
+          Backburner.work("default")
         end
       end
 
@@ -35,7 +35,7 @@ Puma::Plugin.create do
         @backburner_pid = fork do
           $0 = "backburner worker"
           Thread.new { monitor_puma }
-          Backburner.work
+          Backburner.work("default")
         end
       end
 

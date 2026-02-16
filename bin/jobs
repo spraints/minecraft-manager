@@ -3,7 +3,7 @@
 
 require_relative "../config/environment"
 
-queues = []
+queues = ["default"] # if you change this, you should probably change otherlib/puma/plugin/backburner, too.
 opts = {}
 while arg = ARGV.shift
   case arg
@@ -21,11 +21,9 @@ while arg = ARGV.shift
       puts File.readlines(__FILE__).grep(/^#\//).map { |s| s[4..] }
       exit 1
     end
-  when /^-/
+  else
     puts File.readlines(__FILE__).grep(/^#\//).map { |s| s[4..] }
     exit 1
-  else
-    queues << arg
   end
 end
 
