@@ -17,7 +17,7 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem "minitest", "~> 5"
+gem "minitest", "~> 6"
 
 gem "mission_control-jobs"
 
