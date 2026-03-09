@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+#/ Usage:
+#/ 1. newbranch mega-update
+#/ 2. script/dependabot-octopus-merge
+#/ 3. git push origin mega-update
+#/ 4. (wait for ci to pass)
+#/ 5. git push origin mega-update:main :mega-update
+
+require "shellwords"
+
+def main
+  r "git", "fetch", "--all", "--prune"
+
+  r, w = IO.pipe
+  spawn "git", "for-each-ref", "refs/remotes/origin/dependabot/**", out: w
+  w.close
+
+  branches = []
+  r.each_line do |line|
+    oid, objtype, ref = line.strip.split
+    branch = ref.sub(/^refs\/remotes\//, "")
+    branches << branch
+  end
+
+  if branches.empty?
+    puts "No dependabot PRs found"
+    exit 0
+  end
+
+  r "git", "merge", "-m", "Merge all open dependabot updates", *branches
+end
+
+def r(*cmd)
+  puts "+ #{Shellwords.join(cmd)}"
+  system(*cmd) or abort
+end
+
+main
